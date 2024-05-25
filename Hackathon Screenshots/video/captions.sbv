@@ -1,0 +1,375 @@
+0:00:00.160,0:00:04.839
+title and brief overview title hackathon
+
+0:00:02.679,0:00:06.759
+Heroes an interactive platform for
+
+0:00:04.839,0:00:08.880
+collaborative Innovation brief overview
+
+0:00:06.759,0:00:10.880
+hackathon Heroes is a comprehensive
+
+0:00:08.880,0:00:13.360
+platform designed to facilitate and
+
+0:00:10.880,0:00:15.440
+manage hackathons it encompasses a wide
+
+0:00:13.360,0:00:17.560
+range of functionalities including user
+
+0:00:15.440,0:00:19.640
+authentication posting updates
+
+0:00:17.560,0:00:21.320
+displaying news feeds creating and
+
+0:00:19.640,0:00:23.279
+joining challenges maintaining
+
+0:00:21.320,0:00:25.359
+leaderboards managing administrative
+
+0:00:23.279,0:00:27.560
+tasks and sending
+
+0:00:25.359,0:00:29.240
+notifications the platform aims to
+
+0:00:27.560,0:00:31.400
+provide a seamless experience for
+
+0:00:29.240,0:00:34.040
+participants and organizers fostering
+
+0:00:31.400,0:00:35.879
+creativity collaboration and
+
+0:00:34.040,0:00:38.280
+Innovation
+
+0:00:35.879,0:00:40.320
+objectives facilitate secure user
+
+0:00:38.280,0:00:42.760
+registration and
+
+0:00:40.320,0:00:44.760
+authentication enable users to create
+
+0:00:42.760,0:00:47.320
+edit delete and view
+
+0:00:44.760,0:00:49.039
+posts provide a dynamic Newsfeed
+
+0:00:47.320,0:00:52.160
+displaying the latest
+
+0:00:49.039,0:00:53.960
+posts allow users to create join and
+
+0:00:52.160,0:00:56.239
+participate in various
+
+0:00:53.960,0:00:57.600
+challenges maintain accurate and
+
+0:00:56.239,0:01:00.079
+realtime
+
+0:00:57.600,0:01:02.399
+leaderboards offer comprehensive admin
+
+0:01:00.079,0:01:04.400
+functionalities for user and content
+
+0:01:02.399,0:01:06.439
+management deliver real-time
+
+0:01:04.400,0:01:08.799
+notifications for user
+
+0:01:06.439,0:01:11.560
+activities of
+
+0:01:08.799,0:01:13.600
+perspective new 5p hackathon Heroes is a
+
+0:01:11.560,0:01:15.720
+new project developed from scratch
+
+0:01:13.600,0:01:17.920
+designed to offer an integrated solution
+
+0:01:15.720,0:01:20.320
+for managing hackathons it does not
+
+0:01:17.920,0:01:22.040
+extend an old FP or merge features from
+
+0:01:20.320,0:01:24.680
+different existing products but
+
+0:01:22.040,0:01:27.280
+introduces a unique Consolidated
+
+0:01:24.680,0:01:29.920
+platform technical
+
+0:01:27.280,0:01:32.040
+aspect operating system compatible with
+
+0:01:29.920,0:01:33.439
+with multiple operating systems Windows
+
+0:01:32.040,0:01:38.600
+Mac OS
+
+0:01:33.439,0:01:40.920
+Linux ID Visual Studio code SDK
+
+0:01:38.600,0:01:45.640
+Frameworks frontend
+
+0:01:40.920,0:01:46.920
+HTML CSS bootstrap JavaScript backend
+
+0:01:45.640,0:01:49.360
+PHP
+
+0:01:46.920,0:01:52.159
+laravel aim engine not
+
+0:01:49.360,0:01:55.119
+applicable database management system
+
+0:01:52.159,0:01:58.920
+dbmm ql for handling data
+
+0:01:55.119,0:02:00.880
+storage application area solving a re
+
+0:01:58.920,0:02:03.039
+life problem hacker on Heroes addresses
+
+0:02:00.880,0:02:05.719
+the need for a streamlined efficient
+
+0:02:03.039,0:02:08.520
+platform to organize and participate in
+
+0:02:05.719,0:02:10.400
+hackathons it is designed to solve real
+
+0:02:08.520,0:02:12.480
+life problems faced by organizers and
+
+0:02:10.400,0:02:14.720
+participants such as managing user
+
+0:02:12.480,0:02:17.280
+authentication tracking challenges
+
+0:02:14.720,0:02:19.239
+updating leaderboards and sending
+
+0:02:17.280,0:02:21.360
+notifications the platform supports
+
+0:02:19.239,0:02:23.879
+Innovation and collaboration making it
+
+0:02:21.360,0:02:26.080
+ideal for educational institutions Tech
+
+0:02:23.879,0:02:27.800
+communities and organizations looking to
+
+0:02:26.080,0:02:30.160
+Foster creativity and problemsolving
+
+0:02:27.800,0:02:31.800
+skills this is the registration page
+
+0:02:30.160,0:02:34.080
+where users can register themselves this
+
+0:02:31.800,0:02:36.680
+is the login page without registration
+
+0:02:34.080,0:02:39.200
+users cannot log in to the homepage
+
+0:02:36.680,0:02:41.319
+after logging in this is the homepage
+
+0:02:39.200,0:02:42.879
+and on the left side there is a posting
+
+0:02:41.319,0:02:45.280
+section where you can see the latest
+
+0:02:42.879,0:02:47.319
+posts from all users and a comment bar
+
+0:02:45.280,0:02:49.080
+under each post allowing you to comment
+
+0:02:47.319,0:02:51.200
+on the user's Post in the posting
+
+0:02:49.080,0:02:53.159
+section there is a create post button
+
+0:02:51.200,0:02:55.680
+where you can create a post on the right
+
+0:02:53.159,0:02:57.319
+side you'll also see a notification icon
+
+0:02:55.680,0:02:59.159
+when you click on it you can view the
+
+0:02:57.319,0:03:01.040
+notifications you have received on the
+
+0:02:59.159,0:03:03.560
+right side there are link buttons to
+
+0:03:01.040,0:03:06.159
+navigate to the next page named profile
+
+0:03:03.560,0:03:08.519
+leaderboard search challenge 1v1
+
+0:03:06.159,0:03:10.760
+tournament settings here is the search
+
+0:03:08.519,0:03:12.200
+page on the search page users can search
+
+0:03:10.760,0:03:14.000
+for other users or anything they are
+
+0:03:12.200,0:03:16.319
+looking for on the platform here is the
+
+0:03:14.000,0:03:18.000
+profile page it will display the user's
+
+0:03:16.319,0:03:20.799
+profile picture and further details such
+
+0:03:18.000,0:03:22.159
+as name email address bio skills and
+
+0:03:20.799,0:03:23.840
+links to additional websites or
+
+0:03:22.159,0:03:26.200
+portfolios that the user can view here
+
+0:03:23.840,0:03:27.879
+tournament page here users can create
+
+0:03:26.200,0:03:30.400
+tournaments and manage them directly on
+
+0:03:27.879,0:03:32.560
+this page multiple users can come here
+
+0:03:30.400,0:03:33.879
+to see who is organizing tournaments and
+
+0:03:32.560,0:03:35.840
+can also join them here is the
+
+0:03:33.879,0:03:38.560
+leaderboard page on this page you can
+
+0:03:35.840,0:03:40.519
+see all users points and their positions
+
+0:03:38.560,0:03:42.799
+it will be continuously updated based on
+
+0:03:40.519,0:03:44.959
+users performance with points increasing
+
+0:03:42.799,0:03:47.439
+or decreasing causing their rankings to
+
+0:03:44.959,0:03:49.400
+go up or down here is the settings page
+
+0:03:47.439,0:03:51.840
+this page provides multiple settings
+
+0:03:49.400,0:03:54.000
+that users can utilize accounts users
+
+0:03:51.840,0:03:56.360
+can manage their accounts notifications
+
+0:03:54.000,0:03:58.360
+users can enable or disable different
+
+0:03:56.360,0:04:00.040
+types of platform notifications
+
+0:03:58.360,0:04:02.000
+appearance users can customize the
+
+0:04:00.040,0:04:04.200
+platform to their preferences such as
+
+0:04:02.000,0:04:06.200
+theme and other visual elements privacy
+
+0:04:04.200,0:04:08.959
+security users can manage their account
+
+0:04:06.200,0:04:10.799
+privacy and enhance security help
+
+0:04:08.959,0:04:13.120
+support if users need help with anything
+
+0:04:10.799,0:04:15.239
+on the website they can find complete
+
+0:04:13.120,0:04:17.280
+information here about users can find
+
+0:04:15.239,0:04:19.359
+details about the platform and its
+
+0:04:17.280,0:04:21.040
+creators this structured approach
+
+0:04:19.359,0:04:23.240
+ensures that the hackathon heroes
+
+0:04:21.040,0:04:25.759
+project is well organized with separate
+
+0:04:23.240,0:04:27.960
+concerns for user authentication posting
+
+0:04:25.759,0:04:29.720
+and challenges all tied together through
+
+0:04:27.960,0:04:31.360
+database relationships models and
+
+0:04:29.720,0:04:33.440
+controllers the use of middleware
+
+0:04:31.360,0:04:37.240
+ensures that only authenticated users
+
+0:04:33.440,0:04:37.240
+can perform certain actions
+
