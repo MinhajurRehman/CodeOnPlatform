@@ -20,7 +20,7 @@ body {
     font-weight: 400;
     letter-spacing: .025em;
     color: #868686;
-    background: #272727;
+    background: black;
     -webkit-overflow-scrolling: touch
 }
 
@@ -220,7 +220,6 @@ a.brand:focus {
     width: 100%;
     z-index: 101;
     background-color: #272727;
-    opacity: 0.6;
     -webkit-transform: translateX(100%);
     -ms-transform: translateX(100%);
     -o-transform: translateX(100%);
@@ -309,7 +308,7 @@ a.brand:focus {
 }
 
 .menu-list li i {
-    color: red;
+    color: green;
     font-size: 30px;
     padding-right: 20px;
 }
@@ -1665,7 +1664,7 @@ a {
 
 
 .main strong {
-    Color: red !important;
+    Color: green !important;
     font-size: 60px;
     font-family: Fantasy;
 }
@@ -1697,7 +1696,7 @@ a {
 }
 
 .scroll-stylish::-webkit-scrollbar-thumb {
-    background-color: red;
+    background-color: green;
     /* Color of the scrollbar thumb */
     border: 2px solid #272727;
     /* Adds space between the thumb and track */
@@ -1707,13 +1706,13 @@ a {
 .scroll-stylish {
     scrollbar-width: none;
     /* Options: auto, thin, none */
-    scrollbar-color: red #272727;
+    scrollbar-color: green #272727;
     /* Thumb color and track color */
 }
 
 .card {
     background-color: transparent !important;
-    border-bottom: 4px solid red !important;
+    border-bottom: 4px solid green !important;
 }
 
 .card-footer {
@@ -1722,7 +1721,7 @@ a {
 
 .card h6,
 .card a {
-    color: red !important;
+    color: green !important;
 }
 
 .card p {
@@ -1730,20 +1729,20 @@ a {
 }
 
 .card button {
-    background-color: red !important;
+    background-color: green !important;
     color: white;
     border: none !important;
 }
 
 .post button {
-    background-color: red;
+    background-color: green;
     color: white;
     font-size: small;
     border: none;
 }
 
 .post button:hover {
-    background-color: red;
+    background-color: green;
     color: white;
     font-size: small;
     border: none;
@@ -1783,7 +1782,7 @@ a {
     position: absolute;
     top: 1px;
     left: 10px;
-    background: red;
+    background: green;
     color: white;
     border-radius: 50%;
     padding: 5px 10px;
@@ -1865,9 +1864,9 @@ a {
     padding: 15px;
     text-align: center;
     color: white;
-    box-shadow: 10px 10px 5px red;
+    box-shadow: 10px 10px 5px green;
     transform:
-        perspective(900px) rotateX(50deg) scale(0.9);
+        perspective(900px) rotateX(30deg) scale(0.9);
     transition: 0.5s ease all;
 }
 
@@ -1879,7 +1878,7 @@ a {
 
 .section-nav i {
     font-size: 25px;
-    color: red;
+    color: green;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -1905,7 +1904,7 @@ a {
 
 .leaderboard-container {
     margin: 20px auto;
-    background-color: #960000;
+    background-color: transparent;
     /* Darker red background */
     border-radius: 10px;
     overflow: hidden;
@@ -1916,7 +1915,7 @@ a {
     display: flex;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid green;
 }
 
 .leaderboard-item:last-child {
@@ -1926,7 +1925,7 @@ a {
 .leaderboard-rank {
     font-weight: bold;
     font-size: 24px;
-    color: #ffcc00;
+    color: #BF40BF;
     /* Gold color */
     margin-right: 15px;
     width: 40px;
@@ -1939,7 +1938,7 @@ a {
     height: 50px;
     object-fit: cover;
     margin-right: 15px;
-    border: 2px solid #ffcc00;
+    border: 2px solid green;
     /* Gold border */
 }
 
@@ -1955,7 +1954,7 @@ a {
 
 .leaderboard-points {
     font-size: 26px;
-    color: #ffcc00;
+    color: #BF40BF;
     /* Gold color */
     display: flex;
     align-items: center;
@@ -1981,7 +1980,7 @@ a {
     position: absolute;
     right: 13px;
     top: 15px;
-    color: red;
+    color: green;
     font-size: larger;
 
 }
@@ -1995,7 +1994,7 @@ a {
 .form-control:focus {
     background-color: white;
     box-shadow: black;
-    border-color: red;
+    border-color: green;
 }
 
 
@@ -2015,11 +2014,11 @@ a {
 
 .list i {
     font-size: 19px;
-    color: red;
+    color: green;
 }
 
 .list span {
-    color: red;
+    color: green;
 }
 
 .list small {
@@ -2032,7 +2031,7 @@ a {
 }
 
 .card-3 ul li svg {
-    color: red !important;
+    color: green !important;
 }
 
 .carousel-inner img {
@@ -2069,9 +2068,9 @@ a {
 }
 
 .box {
-    background-color: #222;
+    background-color: black;
     border: 1px solid black;
-    box-shadow: 0 0 10px red;
+    box-shadow: 0 0 10px #BF40BF;
     padding: 20px;
     text-align: center;
     width: 400px;
@@ -2083,7 +2082,7 @@ a {
 
 .icon {
     font-size: 40px;
-    color: red;
+    color: green;
     margin-bottom: 10px;
 }
 
@@ -2095,7 +2094,7 @@ a {
 
 .description {
     font-size: 16px;
-    color: white;
+    color: #BF40BF;
 }
 
 .con {
@@ -2135,9 +2134,17 @@ form {
 form button {
     padding: 10px;
     font-size: 16px;
-    background-color: red;
+    background-color: green;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.list-group-item {
+    color: white !important;
+}
+
+.text-secondary {
+    color: white !important;
 }
