@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 class LoginController extends Controller
 {
     public function login(){
-        return view('Login');
+        return view('credentials');
     }
 
     public function registerUser(Request $request){
@@ -50,7 +50,7 @@ class LoginController extends Controller
         if($user){
             if(Hash::check($request->password, $user->password)){
                 $request->session()->put('loginId',$user->id);
-                return redirect('profile');
+                return redirect('/thread');
             }else{
                 return back()->with('fail','Password does not match.');
             }
