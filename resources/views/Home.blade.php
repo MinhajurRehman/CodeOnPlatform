@@ -20,21 +20,22 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="createPostForm">
+          <form id="createPostForm" method="post">
+            @csrf
             <div class="form-group">
-              <label for="postTitle">Title</label>
-              <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
+              <label for="postTitle">Attachment</label>
+              <input type="file" class="form-control" id="postTitle" name="post_image">
             </div>
             <div class="form-group">
               <label for="postContent">Content</label>
-              <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts"></textarea>
+              <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts" name="post_content"></textarea>
             </div>
-          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="savePostButton">Save Post</button>
+          <input type="submit">
         </div>
+    </form>
       </div>
     </div>
   </div>

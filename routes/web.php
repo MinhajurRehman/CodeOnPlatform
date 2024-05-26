@@ -32,9 +32,8 @@ Route::get('logout',[LoginController::class,'logout']);
 // Route::get('/auth/google/callback',[LoginController::class,'googlecallback']);
 
 
-Route::get('/thread', function(){
-    return view('Home');
-});
+Route::get('/thread', [ThreadController::class, 'thread']);
+Route::post('/thread', [ThreadController::class, 'thread_store']);
 
 Route::get('/leaderboard', function(){
     return view('leaderboard');
