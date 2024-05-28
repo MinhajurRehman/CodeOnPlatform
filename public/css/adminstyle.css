@@ -1,0 +1,74 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: fantasy;
+    text-align: center;
+}
+
+.admin-logo {
+    padding-top: 50px;
+}
+
+.admin-logo img {
+    height: 300px;
+}
+
+.admin-logo h1 {
+    font-size: 60px;
+    color: green;
+}
+
+.admin-logo h3 {
+    font-size: 40px;
+}
+
+.admin-login {
+    padding-top: 150px;
+}
+
+.header input {
+    background-color: transparent;
+    border-bottom: 2px solid green;
+    color: white;
+    width: 100%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+.header,
+.footer {
+    padding: 20px;
+}
+
+.footer input {
+    background-color: green;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid #BF40BF;
+    transition: 0.4s;
+}
+
+
+.admin-dashboard {
+    text-align: left;
+    padding-top: 20px;
+}
+
+.admin-dashboard h1 {
+    color: green;
+    font-size: 50px;
+}
+
+.admin-dashboard h1 span {
+    color: white;
+    font-size: 30px;
+}
