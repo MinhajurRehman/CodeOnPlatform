@@ -14,15 +14,82 @@ html {
     -webkit-font-smoothing: antialiased
 }
 
-body {
+body.Default {
     font-family: poppins, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: .025em;
     color: #868686;
-    background: black;
-    -webkit-overflow-scrolling: touch
+    background-image: url('/images/display.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
 }
+
+body.Default::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/display.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: brightness(0.1);
+    opacity: 0.9;
+    z-index: -1;
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+    background-color: black;
+    color: white;
+}
+
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3 {
+    color: red;
+}
+
+.dark-theme .icon {
+    color: red;
+}
+
+.dark-theme span {
+    color: white;
+}
+
+/* Light Theme Styles */
+body.light-theme {
+    background-color: white;
+    color: black;
+}
+
+body.light-theme::before {
+    background-color: white;
+    color: black;
+}
+
+.light-theme h1,
+.light-theme h2,
+.light-theme h3 {
+    color: green;
+}
+
+.light-theme .icon {
+    color: green;
+}
+
+.light-theme span {
+    color: white;
+}
+
 
 .navbar {
     position: absolute;
@@ -220,6 +287,7 @@ a.brand:focus {
     width: 100%;
     z-index: 101;
     background-color: #272727;
+    opacity: 0.9;
     -webkit-transform: translateX(100%);
     -ms-transform: translateX(100%);
     -o-transform: translateX(100%);
@@ -228,6 +296,8 @@ a.brand:focus {
     -o-transition: all .6s ease;
     transition: all .6s ease;
 }
+
+
 
 .close-menu {
     position: absolute;
@@ -278,6 +348,7 @@ a.brand:focus {
     text-decoration: none
 }
 
+
 .menu-list {
     opacity: 0;
     position: absolute;
@@ -285,8 +356,8 @@ a.brand:focus {
     top: 5rem;
     bottom: 10.5rem;
     padding-left: 15%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: scroll;
+    max-height: 400px;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
     font-weight: 600;
@@ -302,16 +373,19 @@ a.brand:focus {
     transition: transform .5s .6s ease, opacity .5s .6s ease;
 }
 
+.menu-list::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-list {
+    scrollbar-width: none;
+}
+
 
 .menu-list li a {
     color: white;
 }
 
-.menu-list li i {
-    color: green;
-    font-size: 30px;
-    padding-right: 20px;
-}
 
 .menu-list .active>a,
 .menu-list li a:hover {
@@ -1712,16 +1786,29 @@ a {
 
 .card {
     background-color: transparent !important;
-    border-bottom: 4px solid green !important;
 }
 
 .card-footer {
     background-color: transparent !important;
 }
 
+.card-footer form {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+
 .card h6,
 .card a {
     color: green !important;
+}
+
+.card h6 {
+    font-size: 25px;
+}
+
+.abc a {
+    color: white !important;
 }
 
 .card p {
@@ -1734,14 +1821,12 @@ a {
 }
 
 .post button {
-    background-color: green;
     color: white;
     font-size: small;
     border: none;
 }
 
 .post button:hover {
-    background-color: green;
     color: white;
     font-size: small;
     border: none;
@@ -1756,35 +1841,15 @@ a {
     z-index: 1000;
 }
 
-.notifications {
-    position: fixed;
-    bottom: 40px;
-    /* Adjust this value as needed */
-    right: 60px;
-    /* Adjust this value as needed */
-    font-size: 40px;
-    /* Adjust the size as needed */
-    color: white;
-    /* Icon color */
-    background: transparent;
-    /* Transparent background */
-    z-index: 1000;
-    /* Ensure it is above other elements */
-
-}
-
-.notifications:hover {
-    font-size: 50px;
-}
 
 .notifications .badge {
     position: absolute;
-    top: 1px;
-    left: 10px;
+    top: 7px;
+    left: 19px;
     background: green;
     color: white;
     border-radius: 50%;
-    padding: 5px 10px;
+    padding: 1px 2px;
     font-size: 12px;
 }
 
@@ -1902,19 +1967,18 @@ a {
 }
 
 .leaderboard-container {
-    margin: 20px auto;
     background-color: transparent;
     /* Darker red background */
     border-radius: 10px;
     overflow: hidden;
-    padding: 20px;
+    padding: 5px;
 }
 
 .leaderboard-item {
     display: flex;
     align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid green;
+    padding: 20px;
+    border-bottom: 1px solid green !important;
 }
 
 .leaderboard-item:last-child {
@@ -2130,6 +2194,7 @@ form {
     box-sizing: border-box;
 }
 
+
 form button {
     padding: 10px;
     font-size: 16px;
@@ -2171,4 +2236,117 @@ form button {
     transform: translateX(100%);
     opacity: 0;
     animation: slideInFromRight 0.6s ease forwards;
+}
+
+.plus-icon-container {
+    position: fixed;
+    bottom: 40px;
+    right: 70px;
+}
+
+.plus-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 34px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon when dropdown is shown */
+.plus-icon[aria-expanded="true"] {
+    transform: rotate(360deg);
+}
+
+.menu i {
+    color: #28a745;
+}
+
+.user-icon-menu a i {
+    font-size: 22px;
+    color: #28a745;
+    float: right;
+    padding-right: 10px;
+}
+
+
+.height {
+
+    height: 100%;
+}
+
+.form {
+
+    position: relative !important;
+}
+
+.form .fa-search {
+
+    position: absolute !important;
+    top: 17px !important;
+    left: 13px !important;
+    color: #9ca3af !important;
+
+}
+
+.form span {
+
+    position: absolute !important;
+    right: 17px !important;
+    top: 13px !important;
+    padding: 2px !important;
+    border-left: 1px solid #d1d5db !important;
+
+}
+
+.left-pan {
+    padding-left: 7px !important;
+}
+
+
+
+.form-input {
+
+    height: 55px !important;
+    text-indent: 33px !important;
+    border-radius: 10px !important;
+}
+
+.form-input:focus {
+
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.user-name a {
+    color: #28a745 !important;
+}
+
+.modal-dialog {
+    width: 80%;
+    max-width: 800px;
+}
+
+.modal.fade .modal-dialog {
+    transform: scale(0.8);
+    transition: transform 0.1s ease-out;
+}
+
+.modal.fade.show .modal-dialog {
+    transform: scale(1);
+}
+
+.modal.fade .modal-dialog {
+    transform: translateY(-50px) scale(0.8);
+    opacity: 0;
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.modal.fade.show .modal-dialog {
+    transform: translateY(0) scale(1);
+    opacity: 1;
 }

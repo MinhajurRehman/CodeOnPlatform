@@ -20,12 +20,40 @@
 <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400i&amp;display=swap" rel="stylesheet">
 
 <style>
-    body{
-        background-color: black;
+    body {
+        font-family: poppins, sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: .025em;
+        color: #868686;
+        background-image: url('/images/display.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        -webkit-overflow-scrolling: touch;
+        position: fixed;
+        z-index: 1;
+        overflow: hidden;
     }
+
+    body::before {
+        content: " ";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('/images/display.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        filter: brightness(0.1);
+        opacity: 0.9;
+        z-index: -1;
+    }
+
     .logo-image img{
         padding-top: 120px;
-        height: 450px;
+        height: 500px;
     }
 
     .login{
@@ -73,6 +101,7 @@
     outline: none;
     border-bottom: 2px solid #BF40BF;
     transition: 0.4s;
+    box-shadow: none;
 }
 
     .register a{
@@ -121,12 +150,12 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active{
--webkit-box-shadow: 0 0 0 0 transparent !important;
+    -webkit-box-shadow: 0 0 0px 1000px inset;
 }
 
 /*Change text in autofill textbox*/
 input:-webkit-autofill{
--webkit-text-fill-color: white !important;
+    -webkit-text-fill-color: white !important;
 }
 
 
@@ -134,8 +163,6 @@ input:-webkit-autofill{
 
 </head>
 <body>
-<div class="animsition">
-<div class="loader"><div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div></div>
 
 <div class="container">
     <div class="row">
@@ -162,23 +189,12 @@ input:-webkit-autofill{
                 <div class="footer">
                     <input type="submit">
                 </div>
-                <div class="with">
-                    <h4>Login With</h4>
-                    <i class="fa-brands fa-google"></i>
-                    <i class="fa-brands fa-github"></i>
-                </div>
                 <div class="register">
                     you aren't registered? <a href="#" class="toggle-link" data-target="signup-form"> sign up</a>
                 </div>
             </form>
 
             <form method="post" action="/registeruser" id="signup-form" class="form hidden">
-                @if(Session::has('success'))
-                    <div class="alert alert-success">{{Session::get('success')}}</div>
-                @endif
-                @if(Session::has('fail'))
-                    <div class="alert alert-danger">{{Session::get('fail')}}</div>
-                @endif
                 @csrf
                 <h3>SIGN UP</h3>
                 <div class="header">
@@ -192,11 +208,6 @@ input:-webkit-autofill{
                 </div>
                 <div class="footer">
                     <input type="submit">
-                </div>
-                <div class="with">
-                    <h4>Login With</h4>
-                    <i class="fa-brands fa-google"></i>
-                    <i class="fa-brands fa-github"></i>
                 </div>
                 <div class="register">
                     Are you registered? <a href="#" class="toggle-link" data-target="login-form"> logIn</a>

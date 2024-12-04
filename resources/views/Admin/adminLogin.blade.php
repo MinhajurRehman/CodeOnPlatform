@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
 
-<!-- robert/  03:29:43 GMT -->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,14 +8,14 @@
 <meta name="author" content="">
 
 <link rel="shortcut icon" href="favicon.png">
-<title>Hackathon Heroes</title>
+<title>Hackathon Heroes | Admin Panel</title>
 
-<!-- Bootstrap CDN links -->
+{{--  <!-- Bootstrap CDN links -->  --}}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- Fonts -->
+{{--  <!-- Fonts -->  --}}
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400i&amp;display=swap" rel="stylesheet">
 <link href="css/adminstyle.css" rel="stylesheet" media="screen">
@@ -33,9 +32,13 @@
                     <h3>ADMIN PANEL</h3>
                 </div>
             </div>
+
             <div class="col-md-5">
                 <div class="admin-login">
                     <form method="post">
+                    @if(Session::has('fail'))
+                        <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                    @endif
                         @csrf
                         <div class="header">
                             <input type="email" placeholder="Enter Credentials" name="adminemail">

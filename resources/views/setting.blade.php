@@ -6,6 +6,19 @@
                 <h1> Settings </h1>
             </div>
 
+            @if (session('Saved'))
+                <div class="alert alert-success">
+                    {{ session('Saved') }}
+                </div>
+            @endif
+
+            @if (session('Updated'))
+                <div class="alert alert-success">
+                    {{ session('Updated') }}
+                </div>
+            @endif
+
+
             <div class="con">
                 <button type="button" class="box" data-toggle="modal" data-target="#accountsModal" id="openModalButton">
                     <div class="icon"><i class="fas fa-user"></i></div>
@@ -56,26 +69,27 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createPostModalLabel">Create Post</h5>
+                <h5 class="modal-title" id="createPostModalLabel">Accounts Settings</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Title</label>
-                        <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
+                <form method="post" action="{{ route('accoounts',['id' => $user->id]) }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" id="username" placeholder="Change Username" value="{{ $user->username }}">
+                      </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email Address</label>
+                      <input type="email" name="email" class="form-control" id="email" placeholder="Change Email" value="{{ $user->email }}">
                     </div>
-                    <div class="form-group">
-                        <label for="postContent">Content</label>
-                        <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts"></textarea>
-                    </div>
-                </form>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="savePostButton">Save Post</button>
             </div>
         </div>
     </div>
@@ -86,27 +100,26 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createPostModalLabel">Create Post</h5>
+                <h5 class="modal-title" id="createPostModalLabel">Notifications Settings</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Title</label>
-                        <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
+                <form>
+                    <div class="form-check form-switch mb-3">
+                      <input class="form-check-input" type="checkbox" id="emailNotifications" checked disabled>
+                      <label class="form-check-label" for="emailNotifications">Email Notifications</label>
                     </div>
-                    <div class="form-group">
-                        <label for="postContent">Content</label>
-                        <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts"></textarea>
+                    <div class="form-check form-switch mb-3">
+                      <input class="form-check-input" type="checkbox" id="pushNotifications" checked disabled>
+                      <label class="form-check-label" for="pushNotifications">Push Notifications</label>
                     </div>
-                </form>
+                    <button type="submit" class="btn btn-warning" disabled>Save Preferences</button>
+                  </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="savePostButton">Save Post</button>
-            </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            </div>
         </div>
     </div>
 </div>
@@ -116,27 +129,31 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createPostModalLabel">Create Post</h5>
+                <h5 class="modal-title" id="createPostModalLabel">Appaerance Setting</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Title</label>
-                        <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
+                <form method="post" action="{{ route('appearence',['id' => $user->id]) }}">
+                    @csrf
+                    <div class="mb-3">
+                      <label for="theme" class="form-label">Theme</label>
+                      <select class="form-select" name="Theme" id="theme">
+                        <option value="Light" {{ session('Theme') == 'Light' ? 'selected' : '' }}>Light</option>
+                        <option value="Dark" {{ session('Theme') == 'Dark' ? 'selected' : '' }}>Dark</option>
+                        <option value="Default" {{ session('Theme') == 'Default' ? 'selected' : '' }} selected>Default</option>
+                      </select>
                     </div>
-                    <div class="form-group">
-                        <label for="postContent">Content</label>
-                        <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts"></textarea>
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="checkbox" id="animations" checked disabled>
+                      <label class="form-check-label" for="animations">Enable Animations</label>
                     </div>
-                </form>
+                    <button type="submit" class="btn btn-success">Apply Changes</button>
+                  </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="savePostButton">Save Post</button>
-            </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            </div>
         </div>
     </div>
 </div>
@@ -146,26 +163,39 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createPostModalLabel">Create Post</h5>
+                <h5 class="modal-title" id="createPostModalLabel">Privacy Setting</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Title</label>
-                        <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
+                <form method="post" action="{{ route('security',['id' => $user->id]) }}">
+                    @csrf
+                    <div class="form-check form-switch mb-3">
+                      <input class="form-check-input" type="checkbox" id="twoFactorAuth" checked>
+                      <label class="form-check-label" for="twoFactorAuth">Enable Two-Factor Authentication</label>
                     </div>
-                    <div class="form-group">
-                        <label for="postContent">Content</label>
-                        <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts"></textarea>
+                    <div class="mb-3">
+                      <label for="securityQuestions" class="form-label">Security Questions</label>
+                      <select class="form-select" name="SQ" id="securityQuestions">
+                        <option selected>What was the name of your first pet?</option>
+                        <option>What was your first car?</option>
+                        <option>What is your mothers maiden name?</option>
+                      </select>
                     </div>
-                </form>
+                    <div class="form-check form-switch mb-3">
+                        <label for="securityQuestions" class="form-label">Answer</label>
+                        <input type="text" name="SA" class="form-control" id="answer">
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Change Password</label>
+                      <input type="text" name="password" class="form-control" id="password" placeholder="Change your password">
+                    </div>
+                    <button type="submit" class="btn btn-danger">Update Security</button>
+                  </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="savePostButton">Save Post</button>
             </div>
         </div>
     </div>
@@ -176,27 +206,54 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createPostModalLabel">Create Post</h5>
+                <h5 class="modal-title" id="createPostModalLabel">Help</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Title</label>
-                        <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
+                <div class="accordion" id="helpAccordion">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Frequently Asked Questions
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body">
+                          <strong>Common FAQs:</strong> How to reset password, how to manage notifications, etc.
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                        <label for="postContent">Content</label>
-                        <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts"></textarea>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Contact Support
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body">
+                          Reach us via email: <a href="mailto:support@example.com">support@example.com</a>
+                        </div>
+                      </div>
                     </div>
-                </form>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Submit a Ticket
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body">
+                          Submit a detailed ticket through our <a href="#">Support Portal</a>.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="savePostButton">Save Post</button>
-            </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            </div>
         </div>
     </div>
 </div>
@@ -206,26 +263,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createPostModalLabel">Create Post</h5>
+                <h5 class="modal-title" id="createPostModalLabel">About Us</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Title</label>
-                        <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
-                    </div>
-                    <div class="form-group">
-                        <label for="postContent">Content</label>
-                        <textarea class="form-control" id="postContent" rows="3" placeholder="Enter your thoughts"></textarea>
-                    </div>
-                </form>
+                <p class="lead">Our platform is designed to provide users with control over their privacy , data & experience. We are passionate about delivering high-quality, user-friendly, & secure solutions.</p>
+                <h5>Our Mission</h5>
+                <p>Empowering users to protect their privacy & enjoy a customizable experience online.</p>
+                <h5>Meet the Team</h5>
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center" style="color: black !important;">Minhaj Ur Rehman<span class="badge bg-primary rounded-pill">Founder</span></li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center" style="color: black !important;">Qurat ul Ain Javed<span class="badge bg-info rounded-pill">Co - Founder</span></li>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="savePostButton">Save Post</button>
             </div>
         </div>
     </div>
@@ -256,6 +310,5 @@
 <script src="js/scripts.js"></script>
 </body>
 
-<!-- robert/  03:30:37 GMT -->
 
 </html>

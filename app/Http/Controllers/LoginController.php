@@ -22,8 +22,8 @@ class LoginController extends Controller
     public function registerUser(Request $request){
         $request->validate([
             'username'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|max:12'
+            'email'=>'required|email',
+            'password'=>'required'
         ]);
 
         $user = new User();
@@ -42,7 +42,7 @@ class LoginController extends Controller
     public function loginUser(Request $request){
         $request->validate([
             'email'=>'required|email',
-            'password'=>'required|min:6|max:12'
+            'password'=>'required'
         ]);
 
 
@@ -63,6 +63,9 @@ class LoginController extends Controller
         $user = array();
         if(Session::has('loginId')){
             $user = User::where('id','=',Session::get('loginId'))->first();
+
+            $theme = $user->Theme ?? 'Light';
+            Session::put('theme', $theme);
         }
         return view('profile',compact('user'));
     }

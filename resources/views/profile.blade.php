@@ -1,4 +1,49 @@
 @include('nav.header')
+
+<style>
+    .avatar-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      .avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .edit-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      .avatar-container:hover .edit-overlay {
+        opacity: 1;
+      }
+
+      .edit-overlay span {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .file-input {
+        display: none;
+      }
+
+</style>
+<br>
+<br>
+<br>
  <div class="row">
         <div class="col-md-12">
             <div class="scroll-stylish">
@@ -8,120 +53,423 @@
                     <div class="card-3">
                       <div class="card-body-3">
                         <div class="d-flex flex-column align-items-center text-center">
-                          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                          <img src="{{ asset($user->profile_image) }}" alt="Admin" style="border-radius: 50%; width: 120px; height: 120px;">
                           <div class="mt-3">
-                            <h4>Minhaj Ur Rehman</h4>
-                            <p class="text-secondary mb-1">Full Stack Developer</p>
-                            <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                            <button class="btn btn-success">Follow</button>
-                            <button class="btn btn-outline-success">Message</button>
+                            <h4>{{ $user->username }}</h4>
+                            <p class="text-muted font-size-sm">{{ $user->email }}</p>
+                            <p class="text-secondary mb-1">{{ $user->user_about ?? null }}</p>
+                            <p class="text-muted font-size-sm">{{ $user->user_city ?? null }}</p>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Tournament" id="openModalButton">
+                                Create Tournament
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="card-3 mt-3">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
-                          <span class="text-secondary">https://bootdey.com</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
-                          <span class="text-secondary">bootdey</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-success"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
-                          <span class="text-secondary">@bootdey</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
-                          <span class="text-secondary">bootdey</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                          <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
-                          <span class="text-secondary">bootdey</span>
-                        </li>
-                      </ul>
+
                     </div>
                   </div>
                   <div class="col-md-8">
                     <div class="card-3 mb-3">
                       <div class="card-body-3">
                         <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Full Name</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            Minhaj Ur Rehman
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Email</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            fip@jukmuh.al
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Phone</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            (239) 816-9029
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Mobile</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            (320) 380-4539
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="mb-0">Address</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                            Bay Area, San Francisco, CA
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
                           <div class="col-sm-12">
-                            <a class="btn btn-success " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ProfileEdit" id="openModalButton">
+                                Edit
+                            </button>
+
+                            @if ($tournaments->isNotEmpty())
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#EnrollUsers" id="openModalButton">
+                                PARTICIPANTS
+                            </button>
+
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Results" id="openModalButton">
+                                RESULTS
+                            </button>
+
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#announced" id="openModalButton">
+                                WINNER ANNOUNCED
+                            </button>
+
+                            @foreach ($tournaments as $tournament)
+                            @if ($tournament->status == 'null')
+                                <span style="padding-left: 10px; font-style:italic; color:grey;">
+                                    Your tournament status is pending.
+                                </span>
+                            @endif
+                        @endforeach
+
+                                                                                {{--  announced Popup  --}}
+                                                                                <div class="modal fade" id="announced" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title" id="createPostModalLabel">Winner Announced</h5>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>
+
+                                                                                            <div class="modal-body">
+                                                                                                @foreach ($tournaments as $tournament)
+                                                                                                   <div style="color:#28a745; text-align:center; font-size:25px; font-style:bold; text-transform:uppercase;">
+                                                                                                       {{ $tournament->t_name }}
+                                                                                                    </div>
+                                                                                                    <hr>
+                                                                                                    @php
+                                                                                                    $participantCount = count($tournament->patricipants);
+                                                                                                    $startDateTime = Carbon\Carbon::parse($tournament->t_date_time);
+                                                                                                    $endDateTime = Carbon\Carbon::parse($tournament->t_end_date_time);
+                                                                                                    $currentDateTime = Carbon\Carbon::now();
+                                                                                                    @endphp
+
+                                                                                                    @if ($currentDateTime < $startDateTime)
+                                                                                                        <p>The tournament has not started yet.</p>
+                                                                                                    @elseif ($currentDateTime < $endDateTime)
+                                                                                                        <p>The tournament is still ongoing, results will be available after it ends.</p>
+                                                                                                    @else
+                                                                                                    <form method="POST" action="{{ route('congratulate_winners') }}">
+                                                                                                        @csrf
+                                                                                                        <div class="mb-3">
+                                                                                                            <label for="announced_tname" class="form-label">Tournament Name </label>
+                                                                                                            <input type="text" class="form-control" name="announced_tname" id="announced_tname" placeholder="Enter tournament name" >
+                                                                                                        </div>
+                                                                                                        <div class="mb-3">
+                                                                                                            <label for="winner_name" class="form-label">Winner Name </label>
+                                                                                                            <input type="text" class="form-control" name="winner_name" id="winner_name" placeholder="Enter Winner name" >
+                                                                                                        </div>
+                                                                                                        <div class="mb-3">
+                                                                                                            <label for="winner_points" class="form-label">Winner Points </label>
+                                                                                                            <input type="text" class="form-control" name="winner_points" id="winner_points" placeholder="Enter Winner points" >
+                                                                                                        </div>
+                                                                                                        <div class="mb-3">
+                                                                                                            <label for="Text" class="form-label">Congratulate them </label>
+                                                                                                            <textarea class="form-control" name="Text" id="Text" placeholder="Write Congratulation message" ></textarea>
+                                                                                                        </div>
+                                                                                                        <div class="mb-3">
+                                                                                                            <button type="submit" class="btn btn-success">Congratulation</button>                                                                                                        </div>
+                                                                                                    </form>
+                                                                                                    @endif
+                                                                                                    <hr>
+                                                                                                    <hr>
+                                                                                                @endforeach
+                                                                                            </div>
+
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                {{--  End announced Popup  --}}
+
+                                                        {{--  Result Popup  --}}
+                                                        <div class="modal fade" id="Results" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="createPostModalLabel">RESULTS</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        @foreach ($tournaments as $tournament)
+                                                                           <div style="color:#28a745; text-align:center; font-size:25px; font-style:bold; text-transform:uppercase;">
+                                                                               {{ $tournament->t_name }}
+                                                                            </div>
+                                                                            <hr>
+                                                                            @php
+                                                                            $participantCount = count($tournament->patricipants);
+                                                                            $startDateTime = Carbon\Carbon::parse($tournament->t_date_time);
+                                                                            $endDateTime = Carbon\Carbon::parse($tournament->t_end_date_time);
+                                                                            $currentDateTime = Carbon\Carbon::now();
+                                                                            @endphp
+
+                                                                            @if ($currentDateTime < $startDateTime)
+                                                                                <p>The tournament has not started yet.</p>
+                                                                            @elseif ($currentDateTime < $endDateTime)
+                                                                                <p>The tournament is still ongoing, results will be available after it ends.</p>
+                                                                            @else
+                                                                            <ol>
+                                                                                @for ($i =  0; $i < $participantCount; $i++)
+                                                                                    <li>{{ $tournament->patricipants[$i]->participant->username }} | {{ $tournament->patricipants[$i]->participant->email }} |
+                                                                                        @if ($tournament->patricipants[$i]->tournament_participant_status === 'Done')
+                                                                                        {{ $tournament->patricipants[$i]->participant->points }}
+                                                                                        @else
+                                                                                        <span style="color: red;">Sorry, they cant take your tournament seriously.</span>
+                                                                                        @endif
+                                                                                    </li>
+                                                                                @endfor
+                                                                            </ol>
+                                                                            @endif
+                                                                            <hr>
+                                                                            <hr>
+                                                                        @endforeach
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{--  End result Popup  --}}
+
+                                                        {{--  Tournament participants Popup  --}}
+                                                        <div class="modal fade" id="EnrollUsers" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="createPostModalLabel">TOURNAMENT PARTICIPANTS</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        @foreach ($tournaments as $tournament)
+                                                                           <div style="color:#28a745; text-align:center; font-size:25px; font-style:bold; text-transform:uppercase;">
+                                                                               {{ $tournament->t_name }}
+                                                                            </div>
+                                                                            <hr>
+
+                                                                            <ol>
+                                                                                @php
+                                                                                $participantCount = count($tournament->patricipants);
+
+                                                                                $tournamentDateTime = Carbon\Carbon::parse($tournament->t_date_time);
+
+                                                                                $canStartTournament = $currentDateTime->greaterThanOrEqualTo($tournamentDateTime);
+
+                                                                                @endphp
+
+                                                                                @if ($participantCount == 0)
+                                                                                    <p>No participants yet</p>
+                                                                                    @else
+
+                                                                                    @for ($i =  0; $i < $participantCount; $i++)
+                                                                                        <li>{{ $tournament->patricipants[$i]->participant->username }} | {{ $tournament->patricipants[$i]->participant->email }}</li>
+                                                                                    @endfor
+                                                                                @endif
+                                                                            </ol>
+                                                                            {{--  @endforeach  --}}
+                                                                            <hr>
+                                                                            @if(session('success'))
+                                                                                <div class="alert alert-success">
+                                                                                     {{ session('success') }}
+                                                                                </div>
+                                                                            @endif
+                                                                            <form action="{{ route('tournament.start', $tournament->id) }}" method="POST">
+                                                                                @csrf
+                                                                                <button type="submit" class="btn btn-success btn-block"  {{ $canStartTournament ? '' : 'disabled' }}>Start</button>
+                                                                            </form>
+                                                                            @if(!$canStartTournament)
+                                                                                <p class="text-muted">The tournament will be available to start on {{ $tournamentDateTime->format('Y-m-d H:i A') }}  matched {{ $currentDateTime->format('Y-m-d H:i A') }}</p>
+                                                                            @endif
+                                                                            <hr>
+                                                                            <hr>
+                                                                        @endforeach
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{--  End Tournament participants Popup  --}}
+                                                    @endif
+
+                            {{--  Tournament Popup  --}}
+                            <div class="modal fade" id="Tournament" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="createPostModalLabel">CREATE YOUR TOURNAMENT</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form action="{{ route('tournament') }}" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                {{--  <!-- Tournament Owner Email -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_email" class="form-label">Tournament Owner Email</label>
+                                                  <input type="email" class="form-control" name="t_email" id="t_email" placeholder="Enter Your original email" >
+                                                </div>
+
+                                                {{--  <!-- Tournament Name -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_name" class="form-label">Tournament Name</label>
+                                                  <input type="text" class="form-control" name="t_name" id="t_name" placeholder="Enter tournament name" >
+                                                </div>
+
+                                                {{--  <!-- Tournament Poster Image -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_poster_image" class="form-label">Tournament Poster Image</label>
+                                                  <input type="file" class="form-control" name="t_poster_image" id="t_poster_image" accept="image/*" >
+                                                </div>
+
+                                                {{--  <!-- Tournament Start Date & Time -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_date_time" class="form-label">Start Date & Time</label>
+                                                  <input type="datetime-local" class="form-control" name="t_date_time" id="t_date_time" >
+                                                </div>
+
+                                                <script>
+                                                    document.addEventListener("DOMContentLoaded", function () {
+                                                        const startDateTimeInput = document.getElementById("t_date_time");
+                                                        const boardTimeSelect = document.getElementById("t_board_time");
+                                                        const endDateTimeInput = document.getElementById("t_end_date_time");
+
+                                                        function calculateEndDateTime() {
+                                                            const startDateTime = startDateTimeInput.value;
+                                                            const boardTime = parseInt(boardTimeSelect.value);
+
+                                                            if (startDateTime && boardTime) {
+                                                                // Converting the start date-time to a local date object
+                                                                const startDate = new Date(startDateTime);
+
+                                                                // Adding only the board minutes
+                                                                startDate.setMinutes(startDate.getMinutes() + boardTime);
+
+                                                                // Formatting date-time for the input
+                                                                const year = startDate.getFullYear();
+                                                                const month = String(startDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+                                                                const day = String(startDate.getDate()).padStart(2, '0');
+                                                                const hours = String(startDate.getHours()).padStart(2, '0');
+                                                                const minutes = String(startDate.getMinutes()).padStart(2, '0');
+
+                                                                const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+                                                                endDateTimeInput.value = formattedDate;
+                                                            }
+                                                        }
+
+                                                        startDateTimeInput.addEventListener("change", calculateEndDateTime);
+                                                        boardTimeSelect.addEventListener("change", calculateEndDateTime);
+                                                    });
+
+                                                </script>
+
+                                                {{--  <!-- Tournament Board minutes -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_board_time" class="form-label">How much time do you want to give participants to solve the tournament question?</label>
+                                                  <select class="form-select" name="t_board_time" id="t_board_time" >
+                                                    <option selected disabled>Select minutes</option>
+                                                    <option value="30">30 minutes</option>
+                                                    <option value="15">15 minutes</option>
+                                                    <option value="45">45 minutes</option>
+                                                  </select>
+                                                </div>
+
+                                                {{--  <!-- Tournament End Date & Time -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_end_date_time" class="form-label">End Date & Time</label>
+                                                  <input type="datetime-local" class="form-control" name="t_end_date_time" id="t_end_date_time" readonly>
+                                                </div>
+
+                                                {{--  <!-- Tournament Programming Language -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_Plang" class="form-label">Tournament Programming Language</label>
+                                                  <select class="form-select" name="t_Plang" id="t_Plang" >
+                                                    <option selected disabled>Select Programming Language</option>
+                                                    <option value="node">JS</option>
+                                                    <option value="python">Python</option>
+                                                    <option value="php">PHP</option>
+                                                  </select>
+                                                </div>
+
+                                                {{--  <!-- Tournament Short describtion -->  --}}
+                                                <div class="mb-3">
+                                                  <label for="t_description" class="form-label">Tournament Short Description</label>
+                                                  <textarea class="form-control" name="t_description" id="t_description" rows="2" placeholder="Describe the tournament short description" ></textarea>
+                                                </div>
+
+                                                {{--  <!-- Submit Button -->  --}}
+                                                <button type="submit" class="btn btn-primary">Create Tournament</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--  End Tournament Popup  --}}
+
+
+                            {{--  Profile Edit Popup  --}}
+                            <div class="modal fade" id="ProfileEdit" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="createPostModalLabel">Profile Editing</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post"
+                                             enctype="multipart/form-data"
+                                            >
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                                <div class="avatar-container">
+                                                    <img id="avatar" class="avatar" src="https://img.freepik.com/premium-photo/beautiful-anime-boy_1284283-122.jpg" alt="User Avatar" />
+                                                    <div class="edit-overlay">
+                                                      <span>Edit</span>
+                                                      <input type="file" id="file-input" class="file-input" name="profile_image" accept="image/png, image/jpeg" style="display: none;" />
+                                                    </div>
+                                                </div>
+                                                <span>About</span>
+                                                <input type="text" class="form-control" name="user_about" placeholder="e.g. Full Stack Developer">
+                                                <span>City</span>
+                                                <input type="text" class="form-control" name="user_city" placeholder="City">
+                                                <br>
+                                                <input type="submit" class="btn btn-success btn-block">
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--  End Profile Edit Popup  --}}
+
                           </div>
                         </div>
                       </div>
                     </div>
+                    <br>
 
                     <div class="row gutters-sm">
                         <div class="col-sm-6 mb-3">
                           <div class="card-3 h-100">
                             <div class="card-body-3">
-                              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-success mr-2">assignment</i>Project Status</h6>
-                              <small>Web Design</small>
+                              <small>Points ({{ $user->leaderboard }})</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success"  role="progressbar" style="width:{{ $user->leaderboard ?? 0 }}%;" aria-valuenow="{{ $user->leaderboard ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>Website Markup</small>
+                              <small>Threads</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $posting->id ?? 0 }}%" aria-valuenow="{{ $posting->id ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>One Page</small>
+                              <small>Challenges</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $challenges->id ?? 0 }}%" aria-valuenow="{{ $challenges->id ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>Mobile Template</small>
+                              <small>Tournaments</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $data->id ?? 0 }}%" aria-valuenow="{{ $data->id ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>Backend API</small>
+                              <small>Progress</small>
                               <div class="progress mb-3" style="height: 5px">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
@@ -131,39 +479,61 @@
                         <div class="col-sm-6 mb-3">
                           <div class="card-3 h-100">
                             <div class="card-body-3">
-                              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-success mr-2">assignment</i>Project Status</h6>
-                              <small>Web Design</small>
+                              <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>Website Markup</small>
+                              <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $data->id ?? 0 }}%" aria-valuenow="{{ $data->id ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>One Page</small>
+                              <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $posting->id ?? 0 }}%" aria-valuenow="{{ $posting->id ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>Mobile Template</small>
+                              <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $challenges->id ?? 0 }}%" aria-valuenow="{{ $challenges->id ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                              <small>Backend API</small>
+                              <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width:{{ $user->leaderboard ?? 0 }}%;" aria-valuenow="{{ $user->leaderboard ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                             </div>
                           </div>
-
+                        </div>
+                    </div>
                 </div>
         </div>
     </div>
 </div>
 
+<script>
+    const avatar = document.getElementById('avatar');
+const fileInput = document.getElementById('file-input');
+
+document.querySelector('.edit-overlay').addEventListener('click', () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      avatar.src = e.target.result;
+
+      // Show crop/filter option here
+      // Implement cropper.js or other image cropping/filter libraries
+      // e.g., use Cropper.js for cropping and then save the cropped image
+    };
+    reader.readAsDataURL(file);
+  }
+});
+</script>
 
 
-
-<!-- Bootstrap CND JS -->
+{{--  <!-- Bootstrap CND JS -->  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
@@ -171,7 +541,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<!-- Custom JS -->
+{{--  <!-- Custom JS -->  --}}
 <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/smoothscroll.js"></script>
@@ -184,5 +554,4 @@
 <script src="js/scripts.js"></script>
 </body>
 
-<!-- robert/  03:30:37 GMT -->
 </html>

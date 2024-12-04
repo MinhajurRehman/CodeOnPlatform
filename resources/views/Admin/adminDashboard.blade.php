@@ -1,5 +1,23 @@
 @include('Admin.header')
 
+<h2>VIEW USERS</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>User Emails</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($users as $us)
+
+        <tr>
+            <td>{{ $us->id }}</td>
+            <td>{{ $us->email }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
 
 

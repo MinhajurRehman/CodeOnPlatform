@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Post;
+use App\Models\solutions;
+use App\Observers\CommentObserver;
+use App\Observers\PostObserver;
+
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +23,9 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        Post::observe(PostObserver::class);
+        solutions::observe(CommentObserver::class);
     }
 }

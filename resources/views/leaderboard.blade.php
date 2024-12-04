@@ -8,56 +8,17 @@
                 </div>
                 <br>
                 <br>
+                @foreach ($users as $user)
                 <div class="leaderboard-container">
                     <div class="leaderboard-item">
-                        <div class="leaderboard-rank">1</div>
-                        <img src="https://via.placeholder.com/50" alt="Player 1" class="leaderboard-image">
-                        <div class="leaderboard-details">
-                            <div class="leaderboard-name">Player 1</div>
-                        </div>
-                        <div class="leaderboard-points"><i class="fas fa-trophy"></i> 1.373</div>
-                    </div>
-                    <div class="leaderboard-item">
-                        <div class="leaderboard-rank">2</div>
-                        <img src="https://via.placeholder.com/50" alt="Player 2" class="leaderboard-image">
-                        <div class="leaderboard-details">
-                            <div class="leaderboard-name">Player 2</div>
-                        </div>
-                        <div class="leaderboard-points">5</div>
-                    </div>
-                    <div class="leaderboard-item">
-                        <div class="leaderboard-rank">3</div>
-                        <img src="https://via.placeholder.com/50" alt="Player 3" class="leaderboard-image">
-                        <div class="leaderboard-details">
-                            <div class="leaderboard-name">Player 3</div>
-                        </div>
-                        <div class="leaderboard-points">1</div>
-                    </div>
-                    <div class="leaderboard-item">
-                        <div class="leaderboard-rank">4</div>
-                        <img src="https://via.placeholder.com/50" alt="Player 4" class="leaderboard-image">
-                        <div class="leaderboard-details">
-                            <div class="leaderboard-name">Player 4</div>
-                        </div>
-                        <div class="leaderboard-points">0</div>
-                    </div>
-                    <div class="leaderboard-item">
-                        <div class="leaderboard-rank">5</div>
-                        <img src="https://via.placeholder.com/50" alt="Player 5" class="leaderboard-image">
-                        <div class="leaderboard-details">
-                            <div class="leaderboard-name">Player 5</div>
-                        </div>
-                        <div class="leaderboard-points">0</div>
-                    </div>
-                    <div class="leaderboard-item">
-                        <div class="leaderboard-rank">6</div>
-                        <img src="https://via.placeholder.com/50" alt="Player 6" class="leaderboard-image">
-                        <div class="leaderboard-details">
-                            <div class="leaderboard-name">Player 6</div>
-                        </div>
-                        <div class="leaderboard-points">0</div>
+                                <img src="{{ asset($user->profile_image) }}" alt="Player 1" class="leaderboard-image">
+                                <div class="leaderboard-details">
+                                    <div class="leaderboard-name">{{ $user->username }}  | <span style="font-size:14px; color:#28a745;"> {{ $user->user_about }} </span> </div>
+                                </div>
+                                <div class="leaderboard-points">{{ $user->leaderboard }}</div>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
 
@@ -89,5 +50,4 @@
 <script src="js/scripts.js"></script>
 </body>
 
-<!-- robert/  03:30:37 GMT -->
 </html>

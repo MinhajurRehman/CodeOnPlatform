@@ -1,0 +1,14 @@
+
+id
+username
+email
+email_verified_at
+password
+profile_image
+user_about
+user_city
+user_link0
+user_link1
+user_link2
+user_link3
+user_link4

@@ -9,5 +9,10 @@ class post extends Model
 {
     use HasFactory;
     protected $table = 'posting';
-    protected $primarykey = 'post_id';
+    protected $primarykey = 'id';
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

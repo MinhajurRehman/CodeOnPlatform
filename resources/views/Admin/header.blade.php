@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="favicon.png">
-        <title>Hackathon Heroes</title>
+        <title>Hackathon Heroes | Admin Panel</title>
 
         <!-- Bootstrap CDN links -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,10 +27,10 @@
             </div>
             <div id="navbarNav" class="navcol pt-0 d-none d-lg-block">
                 <ul>
-                    <li class="border-bottom"><a href="{{ url('/Admin/Dashboard') }}"><i class="bi  bi-people fs-6 me-2"></i> Users Accounts </a></li>
-                    <li class="border-bottom"><a href="{{ url('/Admin/categories') }}"><i class="bi fs-6 me-2 bi-file-post"></i>Users Posts</a></li>
-                    <li class="border-bottom"><a href="{{ url('/Admin/products') }}"><i class="bi me-2 fs-6  bi-trophy"></i> Tournament</a></li>
-                    <li class="border-bottom"><a href="{{ url('/Admin/sales') }}"><i class="bi me-2 fs-6  bi-mailbox2"></i> Report</a></li>
+                    <li class="border-bottom"><a href="{{ url('/admin-Dashboard') }}"><i class="bi  bi-people fs-6 me-2"></i> Users Accounts </a></li>
+                    <li class="border-bottom"><a href="{{ url('/admin-Post') }}"><i class="bi fs-6 me-2 bi-file-post"></i>Users Posts</a></li>
+                    <li class="border-bottom"><a href="{{ url('/admin-Tournaments') }}"><i class="bi me-2 fs-6  bi-trophy"></i> Tournament</a></li>
+                    <li class="border-bottom"><a href="{{ url('/admin-report') }}"><i class="bi me-2 fs-6  bi-mailbox2"></i> Report</a></li>
                 </ul>
             </div>
         </header>
@@ -38,21 +38,16 @@
            <div class="nav-bar sticky-top-xl bg-white shadow-sm w-100 p-3">
                <div class="row">
                    <div class="col-md-5">
-                       <div class="input-group mb-0">
-                          <input type="text" class="form-control border-end-0 mb-0" placeholder="Search Apps" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                          <span class="input-group-text sit border-start-0" id="basic-addon2"><i class="bi bi-search"></i></span>
-                        </div>
                    </div>
                    <div class="col-md-2"></div>
                    <div class="col-md-4 text-end">
                        <div class="dropdown pt-2">
                           <a class="cp pt-4 fw-bolder fs-8 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            Vinoth Basker
+                            ADMIN
                           </a>
                           <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Dashboard</a></li>
-                            <li><a class="dropdown-item" href="#">My Downloads</a></li>
-                            <li><a class="dropdown-item" href="">Logout</a></li>
+                            <li><a class="dropdown-item" href="{{ url('adminlogout') }}">Logout</a></li>
                           </ul>
                         </div>
                    </div>
