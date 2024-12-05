@@ -21,9 +21,12 @@ class LoginController extends Controller
 
     public function registerUser(Request $request){
         $request->validate([
-            'username'=>'required',
-            'email'=>'required|email',
-            'password'=>'required'
+            'username' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'max:15'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ], [
+            'username.regex' => 'Username contains only alphabets & spaces.',
+            'username.max' => 'Allow only 15 Characters.',
         ]);
 
         $user = new User();
@@ -42,7 +45,7 @@ class LoginController extends Controller
     public function loginUser(Request $request){
         $request->validate([
             'email'=>'required|email',
-            'password'=>'required'
+            'password'=>'required',
         ]);
 
 

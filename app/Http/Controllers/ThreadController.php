@@ -102,7 +102,9 @@ class ThreadController extends Controller
             $theme = $user->Theme ?? 'Light';
             Session::put('theme', $theme);
         }
+
         $users = User::orderBy('leaderboard', 'desc')->get();
+
         return view('leaderboard',data: [
             'user' => $user,
             'users' => $users,

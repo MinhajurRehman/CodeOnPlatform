@@ -26,6 +26,7 @@
                 window.location.href = '/Hackathon-online-ide'; // Replace with your compiler route
             }
         }, 1000);
+
     </script>
 
 

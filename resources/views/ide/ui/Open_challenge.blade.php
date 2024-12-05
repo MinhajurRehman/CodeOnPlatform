@@ -201,7 +201,7 @@ window.onload = function () {
 function changelanguage() {
     let language = $("#languages").val();
 
-    if (language == "PHP") editor.session.setMode("ace/mode/php");
+    if (language == "php") editor.session.setMode("ace/mode/php");
     else if (language == "python") editor.session.setMode("ace/mode/python");
     else if (language == "node") editor.session.setMode("ace/mode/javascript");
 }
@@ -210,7 +210,7 @@ function changelanguage() {
 function changelanguage() {
     let language = $("#languages").val();
 
-    if (language === "PHP") {
+    if (language === "php") {
         editor.session.setMode("ace/mode/php");
     } else if (language === "python") {
         editor.session.setMode("ace/mode/python");
@@ -222,7 +222,7 @@ function changelanguage() {
     let questionText = "";
     let outputText = "";
     switch (language) {
-        case "PHP":
+        case "php":
             questionText =
                 "Q) Write a PHP code and print Hello ?";
                 {{--  function named `findMostFrequentWord` that takes a string as an argument and returns the most frequently occurring word in the string. If there are multiple words with the same frequency, return any one of them. Ignore case and punctuation.";  --}}

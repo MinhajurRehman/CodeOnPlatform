@@ -277,6 +277,10 @@
                     <br>
 
             @foreach ($tournaments as $tour)
+            @php
+            $tournamentEndTime = Carbon\Carbon::parse($tour->t_end_date_time);
+            $tournamentEnded = $currentDateTime->greaterThanOrEqualTo($tournamentEndTime);
+            @endphp
                 {{--  update design  --}}
                 <div class="d-flex justify-content-center row">
                     <div class="col-md-10">
@@ -300,26 +304,30 @@
                                             <input type="hidden" name="user_id"
                                                 value="{{ $user->id }}">
 
+                                        @if (!$tournamentEnded)
                                             <button class="btn btn-success btn-sm" type="submit"
                                                 @if ($tour->organizer_id == $user->id || in_array($tour->id, $joinedTournamentIds)) disabled @endif>
                                                 <i class="fa fa-handshake"></i>
                                                 Join
                                             </button>
-                                        </form>
-
-                                        <button class="btn btn-sm mt-2" type="button" data-toggle="modal" data-target="#my-popup">
-                                            <i class="fa fa-share-square"></i>
-                                             Share
-                                        </button>
-                                        <br>
-                                        @if(session('loginId') === $tour->organizer_id)
-                                        <form action="{{ route('tournament.delete', $tour->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this tournament?');">
-                                            @csrf
-                                            <button class="btn btn-danger btn-sm mt-2" type="submit">
-                                                <i class="fa fa-trash"></i>
-                                                Delete
+                                        @endif
+                                            </form>
+                                        @if (!$tournamentEnded)
+                                            <button class="btn btn-sm mt-2" type="button" data-toggle="modal" data-target="#my-popup">
+                                                <i class="fa fa-share-square"></i>
+                                                Share
                                             </button>
-                                        </form>
+                                        @endif    
+                                        <br>
+
+                                        @if(session('loginId') === $tour->organizer_id)
+                                            <form action="{{ route('tournament.delete', $tour->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this tournament?');">
+                                                @csrf
+                                                <button class="btn btn-danger btn-sm mt-2" type="submit">
+                                                    <i class="fa fa-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </form>
                                         @endif
                                     </div>
                             </div>

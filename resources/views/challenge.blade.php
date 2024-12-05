@@ -118,9 +118,9 @@ aria-hidden="true">
         <form action="{{ route('challenges.create') }}" method="POST">
          @csrf
          <select class="form-control" name="language" required>
-            <option value="PHP">PHP</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="Python">Python</option>
+            <option value="php">PHP</option>
+            <option value="node">JavaScript</option>
+            <option value="python">Python</option>
         </select>
         <br>
         <button type="submit">Create Challenge</button>

@@ -181,16 +181,16 @@ input:-webkit-autofill{
                 @csrf
                 <h3>LOGIN</h3>
                 <div class="header">
-                    <input type="email" placeholder="Enter Your Email" name="email" autocomplete="on">
+                    <input type="email" placeholder="Enter Your Email" name="email" autocomplete="on" required>
                 </div>
                 <div class="header">
-                    <input type="password" placeholder="Enter your correct password" name="password">
+                    <input type="password" placeholder="Enter your correct password" name="password" required>
                 </div>
                 <div class="footer">
                     <input type="submit">
                 </div>
                 <div class="register">
-                    you aren't registered? <a href="#" class="toggle-link" data-target="signup-form"> sign up</a>
+                    you are not registered? <a href="#" class="toggle-link" data-target="signup-form"> sign up</a>
                 </div>
             </form>
 
@@ -198,13 +198,22 @@ input:-webkit-autofill{
                 @csrf
                 <h3>SIGN UP</h3>
                 <div class="header">
-                    <input type="text" placeholder="Enetr You Username" name="username" autocomplete="on">
+                    <input type="text" placeholder="Enetr You Username" name="username" autocomplete="on" required>
+                    @error('username')
+                        <p>{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="header">
-                    <input type="email" placeholder="Enetr Your Email" name="email" autocomplete="on">
+                    <input type="email" placeholder="Enetr Your Email" name="email" autocomplete="on" required>
+                    @error('email')
+                        <p>{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="header">
-                    <input type="password" placeholder="Enter Your password" name="password">
+                    <input type="password" placeholder="Enter Your password" name="password" required>
+                    @error('password')
+                        <p>{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="footer">
                     <input type="submit">

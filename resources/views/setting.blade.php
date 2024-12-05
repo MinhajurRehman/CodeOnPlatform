@@ -80,10 +80,16 @@
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" name="username" class="form-control" id="username" placeholder="Change Username" value="{{ $user->username }}">
+                        @error('username')
+                        <p>{{ $message }}</p>
+                        @enderror
                       </div>
                     <div class="mb-3">
                       <label for="email" class="form-label">Email Address</label>
                       <input type="email" name="email" class="form-control" id="email" placeholder="Change Email" value="{{ $user->email }}">
+                      @error('email')
+                      <p>{{ $message }}</p>
+                      @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                   </form>
@@ -190,6 +196,9 @@
                     <div class="mb-3">
                       <label for="password" class="form-label">Change Password</label>
                       <input type="text" name="password" class="form-control" id="password" placeholder="Change your password">
+                      @error('password')
+                      <p>{{ $message }}</p>
+                      @enderror
                     </div>
                     <button type="submit" class="btn btn-danger">Update Security</button>
                   </form>

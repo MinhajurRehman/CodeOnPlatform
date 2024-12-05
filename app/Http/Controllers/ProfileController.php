@@ -12,11 +12,14 @@ class ProfileController extends Controller
 {
     public function Profile_data(Request $request){
 
-        // $request->validate([
-        //     'profile_image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'user_city' => 'required',
-        //     'user_about' => 'required',
-        // ]);
+        $request->validate([
+            'profile_image' => 'required|mimes:jpeg,png,jpg',
+            'user_city' => ['required'],
+            'user_about' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'max:20'],
+        ], [
+            'user_about.regex' => 'About field contains alphabets and spaces only.',
+            'user_about.max' => 'About field allow only 20 characters.',
+        ]);
 
         // Handle image upload
 

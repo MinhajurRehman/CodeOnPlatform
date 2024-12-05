@@ -11,6 +11,14 @@ class settingController extends Controller
 {
     public function accounts($id, Request $request){
 
+        $request->validate([
+            'username' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'max:15'],
+            'email' => ['required', 'email'],
+        ], [
+            'username.regex' => 'Username contains only alphabets & spaces.',
+            'username.max' => 'Allow only 15 Characters.',
+        ]);
+
         // update the profile name & email
         $user = User::findOrFail($id);
         $user->username = $request['username'];

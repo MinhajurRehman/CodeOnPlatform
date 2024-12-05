@@ -9,12 +9,11 @@
 <body class="bg-light">
     <div class="container my-5">
         <div class="row text-center">
-            <!-- Creator Section -->
+            {{-- <!-- Creator Section -->  --}}
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-body">
-                        <img src="{{ $creator->profile_image ? asset($creator->profile_image) : asset('default-avatar.png') }}"
-                             alt="Creator Image" class="img-fluid rounded-circle mb-3" width="150" height="150">
+                        <img src="{{ $creator->profile_image ? asset($creator->profile_image) : asset('default-avatar.png') }}" alt="Creator Image" class="img-fluid rounded-circle mb-3" width="150" height="150">
                         <h4>{{ $creator->username }}</h4>
                         <p class="text-muted">Creator</p>
                     </div>
@@ -31,8 +30,7 @@
                 @if ($joiner)
                 <div class="card">
                     <div class="card-body">
-                        <img src="{{ $joiner->profile_image ? asset($joiner->profile_image) : asset('default-avatar.png') }}"
-                             alt="Joiner Image" class="img-fluid rounded-circle mb-3" width="150" height="150">
+                        <img src="{{ $joiner->profile_image ? asset($joiner->profile_image) : asset('default-avatar.png') }}" alt="Joiner Image" class="img-fluid rounded-circle mb-3" width="150" height="150">
                         <h4>{{ $joiner->username }}</h4>
                         <p class="text-muted">Joiner</p>
                     </div>
@@ -70,6 +68,7 @@
                 window.location.href = "{{ url('/openChallenge-compiler', ['id' => $challenge->id]) }}";
             }
         }, 1000); // Update every second
+
     </script>
 </body>
 </html>

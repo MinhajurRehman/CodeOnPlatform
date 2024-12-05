@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('t_end_date_time');
             $table->string('t_Plang');
             $table->string('t_description');
-            $table->string('Status')->nullable();
+            $table->string('Status')->default('pending');
             $table->timestamps();
         });
     }

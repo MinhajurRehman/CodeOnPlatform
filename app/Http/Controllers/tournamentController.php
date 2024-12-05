@@ -7,6 +7,7 @@ use App\Models\congrats;
 use App\Models\participant;
 use App\Models\tournament_model;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use flash;
 use Illuminate\Support\Facades\DB;
@@ -59,9 +60,11 @@ class tournamentController extends Controller
     {
         $user = $request->users;
 
+        $currentDateTime = Carbon::now();
         $tournaments = tournament_model::where('Status','active')->orderBy('created_at', 'desc')->get();
 
         $congratulations = congrats::all();
+
 
         // Get the list of tournaments the user has joined
         $joinedTournamentIds = DB::table('tournaments_participants')
@@ -88,6 +91,7 @@ class tournamentController extends Controller
             'user' => $user,
             'joinedTournamentIds' => $joinedTournamentIds,
             'congratulations' => $congratulations,
+            'currentDateTime' => $currentDateTime,
         ]);
 
     }
@@ -166,7 +170,5 @@ class tournamentController extends Controller
         return redirect()->back()->with('error', 'Failed to delete the tournament. Please try again.');
     }
 }
-
-
 
 }
