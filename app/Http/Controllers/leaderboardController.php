@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class leaderboardController extends Controller
 {
-    public function get_points(Request $request){
+    public function get_points($id ,Request $request){
 
         // Store or update the profile
     $user = User::findOrFail($request->user_id);

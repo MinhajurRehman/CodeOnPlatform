@@ -131,7 +131,7 @@
     display: none;
 }
 
-#login-form.show {
+#verify-form.show {
     transform: rotateY(0deg);
 }
 
@@ -164,108 +164,36 @@ input:-webkit-autofill{
 </head>
 <body>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 logo-image">
-            <img src="images/login2.png">
-        </div>
-        <div class="col-md-6 login text-center form-container">
-            <h1>Hackathon</h1>
-            <form method="POST" action="/loginuser" id="login-form" class="form">
-                @if(Session::has('success'))
-                    <div class="alert alert-success">{{Session::get('success')}}</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 logo-image">
+                <img src="images/login2.png">
+            </div>
+            <div class="col-md-6 login text-center form-container">
+                <h1>Hackathon</h1>
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
-                @if(Session::has('fail'))
-                    <div class="alert alert-danger">{{Session::get('fail')}}</div>
-                @endif
+
+            <form action="{{ route('verify.otp') }}" method="POST" id="verify-form" class="form">
                 @csrf
-                <h3>LOGIN</h3>
                 <div class="header">
-                    <input type="email" placeholder="Enter Your Email" name="email" autocomplete="on" required>
+                <input type="hidden" name="email" value="{{ old('email', $email) }}">
+                <label for="otp">Enter OTP:</label>
+                <input type="number" name="otp" placeholder="Enter OTP" required>
                 </div>
-                <div class="header">
-                    <input type="password" placeholder="Enter your correct password" name="password" required>
-                </div>
+                @if ($errors->has('otp'))
+                    <span class="text-danger">{{ $errors->first('otp') }}</span>
+                @endif
                 <div class="footer">
-                    <input type="submit">
-                </div>
-                <div class="register">
-                    you are not registered? <a href="#" class="toggle-link" data-target="signup-form"> sign up</a>
+                <input type="submit" value="verify">
                 </div>
             </form>
 
-            <form method="post" action="/registeruser" id="signup-form" class="form hidden">
-                @csrf
-                <h3>SIGN UP</h3>
-                <div class="header">
-                    <input type="text" placeholder="Enetr You Username" id="username" name="username" maxlength="15" autocomplete="on" required>
-                    <small id="usernameError" style="color: red; display: none;">Username must only contain alphabets & spaces and be 15 characters or less.</small>
-                    @error('username')
-                        <p>{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="header">
-                    <input type="email" placeholder="Enetr Your Email" name="email" autocomplete="on" required>
-                    @error('email')
-                        <p>{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="header">
-                    <input type="password" placeholder="Enter Your password" name="password" required>
-                    @error('password')
-                        <p>{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="footer">
-                    <input type="submit">
-                </div>
-                <div class="register">
-                    Are you registered? <a href="#" class="toggle-link" data-target="login-form"> logIn</a>
-                </div>
-            </form>
 
+            </div>
         </div>
     </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const toggleLinks = document.querySelectorAll(".toggle-link");
-    const forms = document.querySelectorAll(".form");
-
-    toggleLinks.forEach(link => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const targetId = link.getAttribute("data-target");
-            const targetForm = document.getElementById(targetId);
-
-            forms.forEach(form => {
-                form.classList.remove("show");
-                form.classList.add("hidden");
-            });
-
-            targetForm.classList.remove("hidden");
-            targetForm.classList.add("show");
-        });
-    });
-});
-
-
-    document.getElementById('username').addEventListener('input', function () {
-        const username = this.value;
-        const errorElement = document.getElementById('usernameError');
-
-        // Check for invalid characters or length
-        const regex = /^[a-zA-Z\s]+$/;
-        if (!regex.test(username) || username.length > 15) {
-            errorElement.style.display = 'inline';
-        } else {
-            errorElement.style.display = 'none';
-        }
-    });
-
-</script>
-
 
 {{--  <!-- Bootstrap CND JS -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></> -->
@@ -295,3 +223,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+

@@ -5,6 +5,7 @@ use App\Http\Controllers\challengeController;
 use App\Http\Controllers\leaderboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\notifyController;
+use App\Http\Controllers\OTPController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\searchController;
 use App\Http\Controllers\settingController;
@@ -45,6 +46,7 @@ use Illuminate\Support\Facades\Route;
 // Login Routes
 Route::get('/', [LoginController::class, 'login']);
 Route::post('registeruser', [LoginController::class, 'registerUser']);
+Route::post('/verify-otp', [LoginController::class, 'verifyOTP'])->name('verify.otp');
 Route::post('loginuser', [LoginController::class, 'loginUser'])->name('loginuser');
 Route::get('logout', [LoginController::class, 'logout']);
 
@@ -156,7 +158,7 @@ Route::middleware("LoginCheck")->group(function(){
         ]);
     });
 
-    Route::post('/Hackathon-online-ide',[leaderboardController::class, 'get_points']);
+    Route::post('/Hackathon-online-ide/{id}',[leaderboardController::class, 'get_points']);
 
     Route::get('/tournament', [tournamentController::class, 'Share'])->name('tournament_get');
 
@@ -236,6 +238,7 @@ Route::middleware("LoginCheck")->group(function(){
     Route::post('/delete-openChallenge', [ChallengeController::class, 'deleteOpenChallenge'])->name('delete.openChallenge');
 
     Route::post('/tournament/delete/{id}', [tournamentController::class, 'deleteTournament'])->name('tournament.delete');
+
 
 });
 

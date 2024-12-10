@@ -200,19 +200,19 @@
                             <div class="card-body-3">
                               <small>Points ({{ $user->leaderboard }})</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success"  role="progressbar" style="width:{{ $user->leaderboard }}%;" aria-valuenow="{{ $user->leaderboard }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success"  role="progressbar" style="width:{{ $user->leaderboard ?? 0}}%;" aria-valuenow="{{ $user->leaderboard ?? 0}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                               <small>Threads</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $posting->id }}%" aria-valuenow="{{ $posting->id }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $posting->id ?? 0}}%" aria-valuenow="{{ $posting->id ?? 0}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                               <small>Challenges</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $challenges->id }}%" aria-valuenow="{{ $challenges->id }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $challenges->id ?? 0 }}%" aria-valuenow="{{ $challenges->id ?? 0}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                               <small>Tournaments</small>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $data->id }}%" aria-valuenow="{{ $data->id }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $data->id ?? 0 }}%" aria-valuenow="{{ $data->id ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                               <small>Progress</small>
                               <div class="progress mb-3" style="height: 5px">
@@ -230,19 +230,19 @@
                               </div>
                               <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $data->id }}%" aria-valuenow="{{ $data->id }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $data->id ?? 0}}%" aria-valuenow="{{ $data->id ?? 0}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                               <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $posting->id }}%" aria-valuenow="{{ $posting->id }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $posting->id ?? 0}}%" aria-valuenow="{{ $posting->id ?? 0}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                               <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $challenges->id }}%" aria-valuenow="{{ $challenges->id }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $challenges->id ?? 0}}%" aria-valuenow="{{ $challenges->id ?? 0}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                               <br>
                               <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-success" role="progressbar" style="width:{{ $user->leaderboard }}%;" aria-valuenow="{{ $user->leaderboard }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width:{{ $user->leaderboard ?? 0}}%;" aria-valuenow="{{ $user->leaderboard ?? 0}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                             </div>
                           </div>

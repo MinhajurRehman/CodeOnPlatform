@@ -154,12 +154,14 @@ aria-hidden="true">
             <td>{{ $challenge->creator_username }}</td>
             <td>{{ $challenge->language }}</td>
             <td>
-                @if ($challenge->joiner_id === null)
-                <a href="{{ route('challenges.join', $challenge->id) }}" class="btn btn-primary">Join</a>
-                @else
-                <span>Working</span>
-                @endif
-            </td>
+                @if (session('loginId') == $challenge->creator_id)
+                    <span>You are creator</span>
+                    @elseif ($challenge->joiner_id === null)
+                        <a href="{{ route('challenges.join', $challenge->id) }}" class="btn btn-primary">Join</a>
+                    @else
+                    <span>Working</span>
+                    @endif
+                </td>
         </tr>
 
         <script>

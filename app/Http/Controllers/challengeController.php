@@ -66,17 +66,18 @@ class challengeController extends Controller
              $user = User::where('id','=',Session::get('loginId'))->first();
          }
          // Fetch challenges with creator's profile details using JOIN
-         $challenges = DB::table('openchallenges')
-             ->join('users as creators', 'openchallenges.creator_id', '=', 'creators.id')
-             ->leftJoin('users as joiners', 'openchallenges.joiner_id', '=', 'joiners.id')
-             ->select(
-                 'openchallenges.id',
-                 'creators.username as creator_username',
-                 'creators.profile_image as creator_image',
-                 'openchallenges.language',
-                 'openchallenges.joiner_id'
-             )
-             ->get();
+            $challenges = DB::table('openchallenges')
+            ->join('users as creators', 'openchallenges.creator_id', '=', 'creators.id')
+            ->leftJoin('users as joiners', 'openchallenges.joiner_id', '=', 'joiners.id')
+            ->select(
+        'openchallenges.id',
+            'openchallenges.creator_id',
+            'openchallenges.language',
+            'openchallenges.joiner_id',
+            'creators.username as creator_username',
+            'creators.profile_image as creator_image'
+        )
+        ->get();
 
          return view('challenge',[
              "challenges" => $challenges,
@@ -187,21 +188,21 @@ class challengeController extends Controller
     {
         $id = $request->input('id');
         $openChallenge = open::find($id);
-    
+
         if ($openChallenge) {
             // Update the redirect_trigger to 2
             $openChallenge->redirect_trigger = 2;
             $openChallenge->save();
-    
+
             // Delete the record
             $openChallenge->delete();
-    
+
             return redirect()->route('challenges.index')->with('success', 'Challenge updated and deleted successfully.');
         }
-    
+
         return redirect()->back()->with('error', 'Unable to delete challenge. Either it does not exist or some error occurred.');
     }
-    
+
 
 
 

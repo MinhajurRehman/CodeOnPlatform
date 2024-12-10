@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string(column: 'SQ')->nullable();
             $table->string(column: 'SA')->nullable();
             $table->string(column: 'Theme')->nullable();
+            $table->string('otp')->nullable();
+            $table->timestamp('otp_expires_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

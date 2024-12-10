@@ -317,7 +317,7 @@
                                                 <i class="fa fa-share-square"></i>
                                                 Share
                                             </button>
-                                        @endif    
+                                        @endif
                                         <br>
 
                                         @if(session('loginId') === $tour->organizer_id)
@@ -363,29 +363,16 @@
                 <br>
                 <br>
 
-            @foreach ($congratulations as $congrats)
 
-                {{--  result design  --}}
-                <div class="d-flex justify-content-center row">
-                    <div class="col-md-10">
-                        <div class="row p-2 bg-transparent border-bottom rounded">
-                            <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                    src="https://i.pinimg.com/originals/81/6f/09/816f0912e313728bb3f945d8fdd4fac4.png"></div>
-                            <div class="col-md-6 mt-1">
-                                <h4>{{ $congrats->announced_tname }}</h4>
-                                <div class="mt-1 mb-1 spec-1"><span><b>Tournament Winner Name:</b> <small> {{ $congrats->winner_name}}</small></span></div>
-                                <div class="mt-1 mb-1 spec-1"><span><b>Tournament Winner Points:</b> <small> {{ $congrats->winner_points }}</small></span></div>
-                                <p class="text-justify para mb-0">{{ $congrats->Text }}.<br><br></p>
-                            </div>
-                        </div>
-                    </div>
+                <div id="winnerDetails">
+                    {{--  <!-- Winner details will be dynamically populated here -->  --}}
                 </div>
-            @endforeach
 
             </div>
         </div>
     </div>
 </div>
+
 
 
 
@@ -448,6 +435,42 @@
             this.className += " active";
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Fetch winners from localStorage
+        const winners = JSON.parse(localStorage.getItem('tournamentWinners')) || [];
+
+        const winnerDetailsDiv = document.getElementById('winnerDetails');
+        winnerDetailsDiv.innerHTML = ''; // Clear existing content
+
+        winners.forEach(winner => {
+            const winnerHTML = `
+                <div class="d-flex justify-content-center row">
+                    <div class="col-md-10">
+                        <div class="row p-2 bg-transparent border-bottom rounded">
+                            <div class="col-md-3 mt-1">
+                                <img class="img-fluid img-responsive rounded product-image"
+                                     src="https://i.pinimg.com/originals/81/6f/09/816f0912e313728bb3f945d8fdd4fac4.png">
+                            </div>
+                            <div class="col-md-6 mt-1">
+                                <h4>${winner.tournamentName}</h4>
+                                <div class="mt-1 mb-1 spec-1">
+                                    <span><b>Tournament Winner Name:</b> <small>${winner.winnerName}</small></span>
+                                </div>
+                                <div class="mt-1 mb-1 spec-1">
+                                    <span><b>Tournament Winner Points:</b> <small>${winner.winnerPoints}</small></span>
+                                </div>
+                                <div class="mt-1 mb-1 spec-1">
+                                    <p class="text-success" style="font-size: 15px;"><b>Congratulations ${winner.winnerName}!</b> 🎉 Keep up the great work and continue to achieve more!</p>                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            winnerDetailsDiv.innerHTML += winnerHTML;
+        });
+    });
+
 </script>
 
 

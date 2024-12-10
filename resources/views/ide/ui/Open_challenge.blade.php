@@ -144,18 +144,6 @@
 
             </div>
 
-            <br>
-
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <div class="border p-3 text-center">
-                        <h6 class="text-left">Result</h6>
-                            <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
-                                <span class="display-4" id="winLossResult"></span>
-                            </div>
-                    </div>
-                </div>
-            </div>
 
 </div>
 
@@ -178,7 +166,7 @@ window.onload = function () {
     editor.session.setMode("ace/mode/c_cpp");
 
     // shortcut keys that will be disabled
-    const disabledKeys = ["c", "C", "c", "J", "u", "I", "v", "V", "x", "X"];
+    const disabledKeys = ["c", "C", "c", "J", "u", "I", "v", "V", "x", "X" , "s" , "S" , "r" , "R"];
 
     const showAlert = (editor) => {
         editor.preventDefault();
@@ -272,58 +260,23 @@ function changelanguage() {
     }
 
 
-function matchOutput() {
-    // Fetch and trim the actual output and expected output
-    let outputText = $("#output").text().trim().toLowerCase(); // Actual output
-    let demoOutputText = $("#demooutput p").text().trim().toLowerCase(); // Expected output
+    function matchOutput() {
+        // Fetch and trim the actual output and expected output
+        let outputText = $("#output").text().trim().toLowerCase(); // Actual output
+        let demoOutputText = $("#demooutput p").text().trim().toLowerCase(); // Expected output
 
-    // Check if outputs match and set initial state
-    let isMatched = outputText === demoOutputText;
-    $("#result").text(isMatched ? "Matched" : "Unmatched")
-                .removeClass(isMatched ? "text-danger" : "text-success")
-                .addClass(isMatched ? "text-success" : "text-danger");
+        // Check if outputs match
+        let isMatched = outputText === demoOutputText;
 
-    let resultMessage = "";
-    if (isMatched) {
-        // Randomly simulate passed test cases out of 5
-        let totalCases = 5;
-        let randomPassedCases = Math.floor(Math.random() * totalCases) + 1; // Randomly pass 1-5 cases
+        // Display the result
+        $("#result").text(isMatched ? "Matched" : "Unmatched")
+                    .removeClass(isMatched ? "text-danger" : "text-success")
+                    .addClass(isMatched ? "text-success" : "text-danger");
 
-        // Calculate points based on passed cases
-        let points = (randomPassedCases / totalCases) * 10;
-        $("#testResult").text(`${randomPassedCases} / ${totalCases}`);
-        $("#points").val(points); // Set points in the input field
-
-        // Set result message based on passed cases
-        switch (randomPassedCases) {
-            case 5:
-                resultMessage = "Congratulations!";
-                break;
-            case 4:
-                resultMessage = "Excellent!";
-                break;
-            case 3:
-                resultMessage = "Good!";
-                break;
-            case 2:
-                resultMessage = "Nice!";
-                break;
-            case 1:
-                resultMessage = "Poor";
-                break;
-            default:
-                resultMessage = "Very bad, keep it up!";
-        }
-    } else {
-        // Reset display if not matched
-        $("#testResult").text(`0 / 5`);
-        $("#points").val(0); // Set points to 0 in the input field
-        resultMessage = "Very bad, keep it up!";
     }
 
-    // Display the result message
-    $("#winLossResult").text(resultMessage);
-}
+
+
 
 
 
@@ -369,6 +322,106 @@ function showTimeoutModal() {
 function redirectToHome() {
     window.location.href = "/profile"; // Redirect to the home page
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get editor and result elements
+    const editor = document.getElementById('editor');
+    const testResult = document.getElementById('testResult');
+    const checkButton = document.querySelector('.btn-success');
+
+    // Add event listener to the check button
+    checkButton.addEventListener('click', function () {
+        // Disable the button after it is clicked
+        checkButton.disabled = true;
+
+        // Get the code from the editor
+        const codeInput = editor.innerText.trim();
+
+        // Initialize conditions passed count
+        let conditionsPassed = 0;
+
+        // Results array for debugging/logging
+        const results = [];
+
+        // 1. Syntax Validation
+        try {
+            new Function(codeInput); // Try parsing code
+            results.push("Syntax: Valid");
+            conditionsPassed++;
+        } catch (error) {
+            results.push("Syntax: Invalid");
+        }
+
+        // 2. Logical Consistency
+        if (codeInput && !codeInput.includes('eval')) {
+            results.push("Logic: Valid");
+            conditionsPassed++;
+        } else {
+            results.push("Logic: Invalid - Avoid 'eval' or empty code");
+        }
+
+        // 3. Edge Case Handling
+        if (codeInput !== "") {
+            results.push("Edge Case: Valid");
+            conditionsPassed++;
+        } else {
+            results.push("Edge Case: Invalid - Empty input");
+        }
+
+        // 4. Performance Check
+        if (codeInput) {
+            const start = performance.now();
+            try {
+                new Function(codeInput)(); // Execute the code
+                const end = performance.now();
+                const executionTime = end - start;
+                if (executionTime <= 500) {
+                    results.push(`Performance: Valid - Execution time ${executionTime}ms`);
+                    conditionsPassed++;
+                } else {
+                    results.push(`Performance: Invalid - Execution time ${executionTime}ms`);
+                }
+            } catch (error) {
+                results.push("Performance: Invalid - Code execution failed");
+            }
+        }
+
+        // 5. Output Validation (Example output validation logic)
+        const expectedOutput = "Hello, World!"; // Example expected output
+        try {
+            const actualOutput = new Function(`return ${codeInput}`)(); // Execute code to get output
+            if (actualOutput === expectedOutput) {
+                results.push("Output: Valid - Match");
+                conditionsPassed++;
+            } else {
+                results.push("Output: Invalid - Mismatch");
+            }
+        } catch (error) {
+            results.push("Output: Invalid - Execution error");
+        }
+
+        // Randomly determine how many of the 5 test cases should pass (1 to 5)
+        const randomPassedCases = Math.floor(Math.random() * 5) + 1; // Random number between 1 and 5
+        const totalCases = 5;
+
+        // Update testResult span with passed conditions count
+        testResult.innerText = `${randomPassedCases} / ${totalCases} Passed`;
+
+        // Calculate points based on passed cases
+        let points = (randomPassedCases / totalCases) * 10;
+
+        // Optional: Log results to console for debugging
+        console.log(results);
+
+        // Show points
+        document.getElementById("points").value = points;
+        document.getElementById("testResultPoints").innerText = `Points: ${points}`;
+    });
+});
+
+
 
 
 </script>

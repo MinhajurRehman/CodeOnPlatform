@@ -88,87 +88,6 @@
                                             RESULTS
                                         </button>
 
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#announced" id="openModalButton">
-                                            WINNER ANNOUNCED
-                                        </button>
-
-                                        @foreach ($data as $tourna)
-                                        @if ($tourna->Status == 'pending')
-                                        <span style="padding-left: 10px; font-style:italic; color:grey;">
-                                            Your tournament status is pending.
-                                        </span>
-                                        @endif
-                                        @endforeach
-
-                                        {{-- announced Popup --}}
-                                        <div class="modal fade" id="announced" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="createPostModalLabel">Winner
-                                                            Announced</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        @foreach ($tournaments as $tournament)
-                                                        <div style="color:#28a745; text-align:center; font-size:25px; font-style:bold; text-transform:uppercase;">
-                                                            {{ $tournament->t_name }}
-                                                        </div>
-                                                        <hr>
-                                                        @php
-                                                        $participantCount = count($tournament->patricipants);
-                                                        $startDateTime = Carbon\Carbon::parse($tournament->t_date_time);
-                                                        $endDateTime =
-                                                        Carbon\Carbon::parse($tournament->t_end_date_time);
-                                                        $currentDateTime = Carbon\Carbon::now();
-                                                        @endphp
-
-                                                        @if ($currentDateTime < $startDateTime) <p>The tournament has
-                                                            not started yet.</p>
-                                                            @elseif ($currentDateTime < $endDateTime) <p>The tournament
-                                                                is still ongoing, results will be available after it
-                                                                ends.</p>
-                                                                @else
-                                                                <form method="POST" action="{{ route('congratulate_winners') }}">
-                                                                    @csrf
-                                                                    <div class="mb-3">
-                                                                        <label for="announced_tname" class="form-label">Tournament Name </label>
-                                                                        <input type="text" class="form-control" name="announced_tname" id="announced_tname" placeholder="Enter tournament name">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="winner_name" class="form-label">Winner Name </label>
-                                                                        <input type="text" class="form-control" name="winner_name" id="winner_name" placeholder="Enter Winner name">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="winner_points" class="form-label">Winner Points </label>
-                                                                        <input type="text" class="form-control" name="winner_points" id="winner_points" placeholder="Enter Winner points">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="Text" class="form-label">Congratulate them
-                                                                        </label>
-                                                                        <textarea class="form-control" name="Text" id="Text" placeholder="Write Congratulation message"></textarea>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <button type="submit" class="btn btn-success">Congratulation</button>
-                                                                    </div>
-                                                                </form>
-                                                                @endif
-                                                                <hr>
-                                                                <hr>
-                                                                @endforeach
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- End announced Popup --}}
-
                                         {{-- Result Popup --}}
                                         <div class="modal fade" id="Results" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -182,6 +101,7 @@
 
                                                     <div class="modal-body">
                                                         @foreach ($tournaments as $tournament)
+                                                        <div class="tournament-result" data-tid="{{ $tournament->id }}">
                                                         <div style="color:#28a745; text-align:center; font-size:25px; font-style:bold; text-transform:uppercase;">
                                                             {{ $tournament->t_name }}
                                                         </div>
@@ -200,13 +120,14 @@
                                                                 is still ongoing, results will be available after it
                                                                 ends.</p>
                                                                 @else
-                                                                <ol>
+
+                                                                <ol class="participant-list">
                                                                     @for ($i = 0; $i < $participantCount; $i++) <li>{{
                                                                         $tournament->patricipants[$i]->participant->username
                                                                         }} | {{
                                                                         $tournament->patricipants[$i]->participant->email
                                                                         }} |
-                                                                        @if($tournament->patricipants[$i]->tournament_participant_statu === 'Done')
+                                                                        @if($tournament->patricipants[$i]->tournament_participant_status === 'Done')
                                                                         {{
                                                                         $tournament->patricipants[$i]->participant->points
                                                                         }}
@@ -217,8 +138,10 @@
                                                                         </li>
                                                                         @endfor
                                                                 </ol>
+                                                                </div>
                                                                 @endif
                                                                 <hr>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="storeWinner()">Announce Results</button>
                                                                 <hr>
                                                                 @endforeach
                                                     </div>
@@ -230,6 +153,7 @@
                                             </div>
                                         </div>
                                         {{-- End result Popup --}}
+
 
                                         {{-- Tournament participants Popup --}}
                                         <div class="modal fade" id="EnrollUsers" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
@@ -584,6 +508,33 @@
                     reader.readAsDataURL(file);
                 }
             });
+
+
+            function storeWinner() {
+                const tournaments = document.querySelectorAll('.tournament-result');
+                const winners = [];
+
+                tournaments.forEach(tournament => {
+                    const participantList = tournament.querySelector('.participant-list');
+                    const participants = participantList.querySelectorAll('li');
+
+                    if (participants.length > 0) {
+                        // Find the highest scorer (first in the list)
+                        const highestScorer = participants[0];
+                        const tournamentName = tournament.querySelector('div').textContent.trim();
+
+                        winners.push({
+                            tournamentName: tournamentName,
+                            winnerName: highestScorer.textContent.split('|')[0].trim(),
+                            winnerPoints: highestScorer.textContent.split('|')[2].trim(),
+                        });
+                    }
+                });
+
+                // Store winners in localStorage
+                localStorage.setItem('tournamentWinners', JSON.stringify(winners));
+                alert('Results announced successfully!');
+            }
 
         </script>
 
